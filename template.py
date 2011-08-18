@@ -55,7 +55,7 @@ def stylesheet(url):
 def javascript(url):
     return E.script('', type='text/javascript', src=url)
 
-def embed_nodes(title=None, css=[], js=[], removals=[]):
+def embed_nodes(flask_app, title, route, methods=None, css=[], js=[], removals=[], **kwargs):
     """
     Decorator to embed nodes inside the HTML node tree
     Pass URLs for css/js to have them added appropriately
@@ -63,6 +63,7 @@ def embed_nodes(title=None, css=[], js=[], removals=[]):
     """
 
     def magic(f):
+        @flask_app.route(route, methods=methods, **kwargs)
         @wraps(f)
         def call(*args, **kwargs):
             html = copy(HTML)

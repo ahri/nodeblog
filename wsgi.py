@@ -1,19 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
-from flask import Flask, flash, redirect, url_for, request, session
+from flask import Flask, redirect, url_for, request, session
 from lxml.builder import E
 from lxml.cssselect import CSSSelector
 from lxml.html import fragments_fromstring
 from lxml.html.clean import Cleaner
-from template import POST, SPACER, embed_nodes
-from blog import Post, Tag
+from template import POST, SPACER, POST_FORM, embed_nodes
+from blog import Post
 from copy import copy
 from elixir import setup_all, create_all, metadata, session as db_session
 from sqlalchemy import desc
 from hashlib import sha1
-from functools import wraps
-from flaskrest import restfuljson
-from formalchemy import FieldSet, Grid
+from flaskutil import restfuljson
 
 app = Flask(__name__)
 app.debug = True
@@ -79,8 +77,9 @@ def post_node(title, datetime, content):
 
     return post
 
-@app.route('/')
-@embed_nodes("Everything looks perfect from far away",
+@embed_nodes(app,
+             "Everything looks perfect from far away",
+             '/',
              css=['http://static.ahri.net/css/blog.css'],
              js=['http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js',
                  'http://static.ahri.net/js/blog.js',
@@ -121,10 +120,9 @@ def login():
         method='post',
     )]
 
-@app.route('/cv')
-@embed_nodes("CV")
+@embed_nodes(app, "CV", '/cv')
 def cv():
     yield E.p("insert CV here")
 
 if __name__ == "__main__":
-    app.run(port=8000)
+    app.run(host='0.0.0.0', port=8000)
