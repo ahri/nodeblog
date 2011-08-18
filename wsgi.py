@@ -90,20 +90,26 @@ def blog():
         yield post_node(post.title, post.datetime, post.content)
         yield copy(SPACER)
 
-@app.route('/add', methods=['GET'])
-#@embed_nodes("Add/Edit")
-def add_edit():
-    fs = FieldSet(Post)
+#------------CRUD
+@embed_nodes(app, "Add", '/add', methods=['GET'])
+def add():
+    yield copy(POST_FORM)
 
-    fs.configure(options=[fs.datetime.hidden(),
-                          fs.content.textarea()])
+@embed_nodes(app, "Add", '/add', methods=['POST'])
+def add_handle():
+    yield E.p("handle the post")
 
-    #for fragment in fragments_fromstring(fs.render()):
-    #    yield fragment
-    return fs.render()
+@embed_nodes(app, "Edit", '/edit/<int:post_id>', methods=['GET'])
+def edit(post_id):
+    form = copy(POST_FORM)
+    yield form
 
-@app.route('/login', methods=['GET', 'POST'])
-@embed_nodes()
+@embed_nodes(app, "Edit", '/edit/<int:post_id>', methods=['POST'])
+def edit_handle(post_id):
+    yield E.p("handle the post")
+#------------CRUD
+
+@embed_nodes(app, "Login", '/login', methods=['GET', 'POST'])
 def login():
     try:
         hsh = sha1(request.form.get('password') + PASSWORD_SALT)

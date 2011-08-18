@@ -136,6 +136,18 @@ SPACER = E.div(
     CLASSES('spacer'),
 )
 
+POST_FORM = E.form(
+    E.dl(
+        E.dt('Title'),
+        E.dd(E.input(type='text', name='title')),
+        E.dt('Body'),
+        E.dd(E.textarea('', name='body')),
+        E.dt('Tags'),
+        E.dd(E.input(type='text', name='tags')),
+        E.dt(E.input(type='submit', value='Post')),
+    )
+)
+
 CV = E.cv(
     E.date("2011-07-05"),
 
