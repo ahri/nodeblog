@@ -12,7 +12,7 @@ def restfuljson(flask_app, route, cls=None):
             f = getattr(c, 'rest_' + fun)
             @flask_app.route(route, methods=[fun.upper()])
             @wraps(f)
-            def wrflask_apper(_f=f, *args, **kwargs):
+            def wrapper(_f=f, *args, **kwargs):
                 response = make_response(json.dumps(_f(*args, **kwargs)))
                 response.headers['Content-Type'] = 'text/json'
                 return response
