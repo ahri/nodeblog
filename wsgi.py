@@ -70,7 +70,7 @@ def niceday(dt):
 def post_node(title, datetime, content):
     post = copy(POST)
     CSSSelector('.title .text')(post)[0].text = title
-    CSSSelector('.datetime')(post)[0].text = datetime.strftime("%I:%M on %A the %%s of %B, %Y") % niceday(datetime)
+    CSSSelector('.datetime')(post)[0].text = datetime.strftime("%H:%M on %A the %%s of %B, %Y") % niceday(datetime)
     content_css = CSSSelector('.content')(post)[0]
     for fragment in fragments_fromstring(cleaner_trusted.clean_html(content)):
         content_css.append(fragment)
