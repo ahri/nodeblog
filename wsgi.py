@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from nodeblogapp import app as application
+from blog import app as application
 
 if __name__ == "__main__":
     application.debug = True

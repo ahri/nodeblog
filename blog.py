@@ -6,7 +6,7 @@ from lxml.cssselect import CSSSelector
 from lxml.html import fragments_fromstring
 from lxml.html.clean import Cleaner
 from template import POST, SPACER, POST_FORM, embed_nodes
-from blog import Post
+from html import Post
 from copy import copy
 from elixir import setup_all, create_all, metadata, session as db_session
 from sqlalchemy import desc
