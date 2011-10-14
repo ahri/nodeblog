@@ -90,8 +90,11 @@ def embed_nodes(flask_app, title, route, methods=None, css=[], js=[], removals=[
                 BODY.append(javascript(url))
 
             for remove in removals:
-                node = html.xpath(remove)[0]
-                node.getparent().remove(node)
+                try:
+                    node = html.xpath(remove)[0]
+                    node.getparent().remove(node)
+                except IndexError:
+                    print "Could not find %s to remove!" % remove
 
             # make sure all fields take UTF-8
             for element in html.xpath("//input | //textarea"):
