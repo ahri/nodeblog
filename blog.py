@@ -12,8 +12,10 @@ from elixir import setup_all, create_all, metadata, session as db_session
 from sqlalchemy import desc
 from hashlib import sha1
 from flaskutil import restfuljson
+from uuid import uuid4
 
 app = Flask(__name__)
+app.secret_key = uuid4().hex
 
 metadata.bind = 'sqlite:///foo.db'
 metadata.bind.echo = True
