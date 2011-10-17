@@ -80,9 +80,9 @@ def post_node(title, datetime, content):
 @embed_nodes(app,
              "Everything looks perfect from far away",
              '/',
-             css=['http://static.ahri.net/css/blog.css'],
+             css=['/static/css/blog.css'],
              js=['http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js',
-                 'http://static.ahri.net/js/blog.js',
+                 '/static/js/blog.js',
                 ],
              removals=["//*[@class='spacer'][last()]"])
 def blog():

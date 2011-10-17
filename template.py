@@ -105,7 +105,7 @@ def embed_nodes(flask_app, title, route, methods=None, css=[], js=[], removals=[
     return magic
 
 # Add css
-for url in ['http://static.ahri.net/css/base.css',
+for url in ['/static/css/base.css',
            ]:
     HEAD.append(stylesheet(url))
 
